@@ -4,6 +4,7 @@ import { IPost } from './Post';
 import '../style/css/App.css';
 import axios from 'axios';
 import Form from './Form';
+import { SearchedPosts } from '../scripts/postsFilter';
 
 const testPosts: IPost[] = [
   {
@@ -29,12 +30,14 @@ const testPosts: IPost[] = [
 function App() {
   const [posts, setPosts] = useState<IPost[]>([])
   const [showPosts, setShowPosts] = useState(false)
+  const [selector, setSelector] = useState('none')
+  const [value, setValue] = useState('')
+  const searchedPostsValue = SearchedPosts(posts, selector, value)
 
   const queryHandler = async (url: string = 'https://jsonplaceholder.typicode.com/posts') => {
     let responce = await axios.get(url)
     setPosts(responce.data)
   }
-
   
   const showHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -44,8 +47,8 @@ function App() {
 
   return (
     <div className='app'>
-      <Form handler={showHandler}/>
-      {showPosts && <Posts title='Posts' posts={posts} />}
+      <Form handler={showHandler} value={value} setValue={setValue} selector={selector} setSelector={setSelector}/>
+      {showPosts && <Posts title='Posts' posts={searchedPostsValue} />}
     </div>
   );
 }

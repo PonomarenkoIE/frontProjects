@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Post, { IPost } from './Post';
 import '../style/css/Posts.css';
 

@@ -2,6 +2,7 @@ import React from 'react'
 import '../style/css/Post.css';
 
 export interface IPost {
+  [index: string]: number | string;
   userId: number;
   id: number;
   title: string;
