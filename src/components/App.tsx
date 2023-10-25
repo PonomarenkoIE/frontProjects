@@ -4,7 +4,7 @@ import { IPost } from './Post';
 import '../style/css/App.css';
 import axios from 'axios';
 import Form from './Form';
-import { SearchedPosts } from '../scripts/postsFilter';
+import { SearchedPosts } from '../scripts/SearchedPosts';
 
 const testPosts: IPost[] = [
   {
