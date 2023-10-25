@@ -5,6 +5,8 @@ import '../style/css/App.css';
 import axios from 'axios';
 import Form from './Form';
 import { SearchedPosts } from '../scripts/SearchedPosts';
+import { useAppSelector } from '../hooks/redux';
+import { useGetPostsQuery } from '../store/Posts/posts.api';
 
 const testPosts: IPost[] = [
   {
@@ -28,10 +30,11 @@ const testPosts: IPost[] = [
 ]
 
 function App() {
-  const [posts, setPosts] = useState<IPost[]>([])
-  const [showPosts, setShowPosts] = useState(false)
+  const favoritePosts = useAppSelector((state) => state.favoritePosts)
+  const {isLoading, isError, data: posts} = useGetPostsQuery('')
   const [selector, setSelector] = useState('none')
   const [value, setValue] = useState('')
+  //TODO, avoid undefined answer from query
   const searchedPostsValue = SearchedPosts(posts, selector, value)
 
   const queryHandler = async (url: string = 'https://jsonplaceholder.typicode.com/posts') => {

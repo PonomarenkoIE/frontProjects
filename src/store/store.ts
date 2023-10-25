@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { postsApi } from './Posts/posts.api'
-import { postsReducer } from './Posts/posts.slice'
+import { favoritePostsReducer } from './Posts/posts.slice'
+import { setupListeners } from '@reduxjs/toolkit/query'
 
-const storePosts = configureStore({
+export const store = configureStore({
   reducer: {
     [postsApi.reducerPath]: postsApi.reducer,
-    posts: postsReducer
+    favoritePosts: favoritePostsReducer
   }
 })
 
-export default storePosts
+setupListeners(store.dispatch)
+
+export type RootState = ReturnType<typeof store.getState>
