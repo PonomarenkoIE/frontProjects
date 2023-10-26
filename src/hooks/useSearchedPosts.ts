@@ -5,7 +5,7 @@ interface ISearchedPosts {
   (posts: IPost[] | undefined, selector: string, value: string): IPost[]
 } 
 
-export const SearchedPosts:ISearchedPosts = (posts, selector, value) => {
+export const useSearchedPosts:ISearchedPosts = (posts, selector, value) => {
   const searchedPosts = useMemo(() => {
     if (typeof(posts) == 'undefined') {return []}
     if (selector === 'userId' || selector === 'id') {
@@ -15,7 +15,7 @@ export const SearchedPosts:ISearchedPosts = (posts, selector, value) => {
       return posts.filter(post => post[selector].toLowerCase().includes(value.toLowerCase()))
     }
     return posts
-  }, [posts, selector, value])
+  }, [posts, value])
 
   return searchedPosts
 }
