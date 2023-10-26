@@ -1,8 +1,7 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import Posts from './Posts';
 import { IPost } from './Post';
 import '../style/css/App.css';
-import axios from 'axios';
 import Form from './Form';
 import { SearchedPosts } from '../scripts/SearchedPosts';
 import { useAppSelector } from '../hooks/redux';
@@ -31,27 +30,17 @@ const testPosts: IPost[] = [
 
 function App() {
   const favoritePosts = useAppSelector((state) => state.favoritePosts)
-  const {isLoading, isError, data: posts} = useGetPostsQuery('')
   const [selector, setSelector] = useState('none')
   const [value, setValue] = useState('')
-  //TODO, avoid undefined answer from query
+  const {isLoading, isError, data: posts} = useGetPostsQuery()
+  const [show, setShow] = useState(false)
   const searchedPostsValue = SearchedPosts(posts, selector, value)
-
-  const queryHandler = async (url: string = 'https://jsonplaceholder.typicode.com/posts') => {
-    let responce = await axios.get(url)
-    setPosts(responce.data)
-  }
   
-  const showHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    queryHandler()
-    setShowPosts(true)
-  }
-
   return (
     <div className='app'>
-      <Form handler={showHandler} value={value} setValue={setValue} selector={selector} setSelector={setSelector}/>
-      {showPosts && <Posts title='Posts' posts={searchedPostsValue} />}
+      <Form setShow={setShow} value={value} setValue={setValue} selector={selector} setSelector={setSelector}/>
+      {isError && <h2 style={{textAlign: 'center', color: 'red'}}>request error!</h2> }
+      {show && <Posts title='Posts' posts={searchedPostsValue} />}
     </div>
   );
 }

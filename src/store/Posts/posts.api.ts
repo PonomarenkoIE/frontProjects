@@ -8,7 +8,7 @@ export const postsApi = createApi({
   }),
   refetchOnFocus: true,
   endpoints: build => ({
-    getPosts: build.query<IPost[], string>({
+    getPosts: build.query<IPost[], void>({
       query: () => 'posts/'
     }),
     getPostComments: build.query<IPost[], string>({
@@ -19,4 +19,7 @@ export const postsApi = createApi({
   })
 })
 
-export const {useGetPostsQuery, useGetPostCommentsQuery} = postsApi
+export const {
+  useGetPostsQuery, 
+  useGetPostCommentsQuery
+} = postsApi

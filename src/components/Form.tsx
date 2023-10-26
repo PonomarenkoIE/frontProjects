@@ -2,7 +2,7 @@ import React from 'react';
 import '../style/css/Form.css';
 
 interface FormProps {
-  handler: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   selector: string
@@ -18,14 +18,19 @@ const labels: {[propName: string]: string} = {
   body: 'Содержание поста',
 }
 
-export default function Form({handler, value, setSelector, selector, setValue}: FormProps) {
+export default function Form({setShow, value, setSelector, selector, setValue}: FormProps) {
+  const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelector(e.currentTarget.value)
+    setValue('')
+  }
+  
   return (
     <form className='form'>
         <select 
           id="label" 
           className='form__select'
           value={selector}
-          onChange={(e) => setSelector(e.currentTarget.value)}
+          onChange={changeHandler}
         >
           <option value="none">Без фильтров</option>
           <option value="userId">Поиск по номеру пользователя</option>
@@ -39,11 +44,13 @@ export default function Form({handler, value, setSelector, selector, setValue}: 
           className="form__input"
           value={value} 
           onChange={(e) => {setValue(e.target.value)}}
-
         />
         <button
           className='form__btn'
-          onClick={handler}
+          onClick={(e) => {
+            e.preventDefault()
+            setShow(true)
+          }}
         >Загрузить список постов</button>
       </form>
   )
