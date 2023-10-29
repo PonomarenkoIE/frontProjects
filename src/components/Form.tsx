@@ -51,7 +51,7 @@ export default function Form({setShow, value, setSelector, selector, setValue}: 
             e.preventDefault()
             setShow(true)
           }}
-        >Загрузить список постов</button>
+        >Показать список постов</button>
       </form>
   )
 }

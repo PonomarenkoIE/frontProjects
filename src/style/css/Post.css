@@ -14,3 +14,6 @@
 .post__title {
   font-weight: bold;
 }
+.post__link {
+  margin: 0 auto;
+}

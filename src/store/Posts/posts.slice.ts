@@ -1,16 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IPost } from "../../components/Post";
 
-interface IpostsInitialState {
+interface IInitialState {
   favoritePosts: IPost[];
 }
 
-interface IremovePostPayload {
-  type: string;
-  value: string; 
+const initialState: IInitialState = {
+  favoritePosts: []
 }
-
-const initialState: IpostsInitialState = {favoritePosts: []}
 
 //posts, selected by user 
 export const favoritePostsSlice = createSlice({
@@ -21,9 +18,9 @@ export const favoritePostsSlice = createSlice({
       state.favoritePosts.push(action.payload)
     },
 
-    removePost(state, action: PayloadAction<IremovePostPayload>) {
+    removePost(state, action) {
       state.favoritePosts = state.favoritePosts.filter((p) => 
-        p[action.payload.type] !== p[action.payload.value]
+        p['id'] !== action.payload
       )
     }
   }
