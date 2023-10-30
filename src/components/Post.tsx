@@ -2,26 +2,27 @@ import React, { useState } from 'react'
 import '../style/css/Post.css';
 import { useDispatch } from 'react-redux';
 import { favoritePostsActions } from '../store/Posts/posts.slice';
+import { useAppSelector } from '../hooks/redux';
 
 export interface IPost {
-  [index: string]: number | string | boolean | undefined;
+  [index: string]: number | string | boolean;
   userId: number;
   id: number;
   title: string;
   body: string;
-  isFavInitial?: boolean;
 }
 
-export default function Post({userId, id, title, body, isFavInitial}: IPost) {
+export default function Post({userId, id, title, body}: IPost) {
+  const {favoritePosts} = useAppSelector(state => state.favoritePosts)
   const {addPost, removePost} = favoritePostsActions
   const dispatch = useDispatch()
-  const [isFav, setIsFav] = useState(isFavInitial === undefined ? false : true)
+  const [isFav, setIsFav] = useState(favoritePosts.includes(id))
   
   const clickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     switch (isFav) {
       case false: {
         setIsFav(prev => !prev)
-        dispatch(addPost({userId, id, title, body, isFav}))
+        dispatch(addPost(id))
         break;
       } 
 

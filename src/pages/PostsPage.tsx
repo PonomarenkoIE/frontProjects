@@ -3,6 +3,8 @@ import { useGetPostsQuery } from '../store/Posts/posts.api'
 import { useSearchedPosts } from '../hooks/useSearchedPosts'
 import Form from '../components/Form'
 import Posts from '../components/Posts'
+import { useAppSelector } from '../hooks/redux'
+import { useFavPosts } from '../hooks/useFavPosts'
 
 /*const testPosts: IPost[] = [
   {
@@ -28,15 +30,15 @@ import Posts from '../components/Posts'
 export default function PostsPage() {
   const [selector, setSelector] = useState('none')
   const [value, setValue] = useState('')
-  const {isLoading, isError, data: posts} = useGetPostsQuery()
   const [show, setShow] = useState(false)
+  const {isLoading, isError, data: posts} = useGetPostsQuery()
   const searchedPostsValue = useSearchedPosts(posts, selector, value)
 
   return (
     <>
       <Form setShow={setShow} value={value} setValue={setValue} selector={selector} setSelector={setSelector}/>
       {isError && <h2 style={{textAlign: 'center', color: 'red'}}> request error!</h2> }
-      {show && <Posts title='Posts' posts={searchedPostsValue} />}
+      <Posts title='Posts' posts={searchedPostsValue} />
     </>
   )
 }

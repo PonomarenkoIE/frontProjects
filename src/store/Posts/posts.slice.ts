@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IPost } from "../../components/Post";
 
 interface IInitialState {
-  favoritePosts: IPost[];
+  favoritePosts: number[];
 }
 
 const initialState: IInitialState = {
@@ -14,13 +14,13 @@ export const favoritePostsSlice = createSlice({
   name: 'favoritePosts',
   initialState,
   reducers: {
-    addPost(state, action: PayloadAction<IPost>) {
+    addPost(state, action: PayloadAction<number>) {
       state.favoritePosts.push(action.payload)
     },
 
-    removePost(state, action) {
+    removePost(state, action: PayloadAction<number>) {
       state.favoritePosts = state.favoritePosts.filter((p) => 
-        p['id'] !== action.payload
+        p !== action.payload
       )
     }
   }

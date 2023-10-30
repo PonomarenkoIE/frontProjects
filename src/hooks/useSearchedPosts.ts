@@ -7,7 +7,7 @@ interface ISearchedPosts {
 
 export const useSearchedPosts:ISearchedPosts = (posts, selector, value) => {
   const searchedPosts = useMemo(() => {
-    if (typeof(posts) == 'undefined') {return []}
+    if (posts === undefined) {return []}
     if (selector === 'userId' || selector === 'id') {
       return posts.filter(post => String(post[selector]).toLowerCase().includes(value.toLowerCase()))
     }
