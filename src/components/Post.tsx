@@ -3,9 +3,10 @@ import '../style/css/Post.css';
 import { useDispatch } from 'react-redux';
 import { favoritePostsActions } from '../store/Posts/posts.slice';
 import { useAppSelector } from '../hooks/redux';
+import { Link } from 'react-router-dom';
 
 export interface IPost {
-  [index: string]: number | string | boolean;
+  [index: string]: number | string;
   userId: number;
   id: number;
   title: string;
@@ -18,7 +19,11 @@ export default function Post({userId, id, title, body}: IPost) {
   const dispatch = useDispatch()
   const [isFav, setIsFav] = useState(favoritePosts.includes(id))
   
-  const clickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const clickCommentsHandler = () => {
+    
+  }
+
+  const clickFavHandler = () => {
     switch (isFav) {
       case false: {
         setIsFav(prev => !prev)
@@ -43,10 +48,11 @@ export default function Post({userId, id, title, body}: IPost) {
       </div>
       <div className='post__title post__item'>{title}</div>
       <div className='post__body post__item'>{body}</div>
+      <Link to={`comments/${id}`}>Комментарии</Link>
       <button 
-        className="post__link"
-        onClick={clickHandler}
-        >{isFav ? 'Убрать' : 'Добавить'}</button>
+        className="post__fav"
+        onClick={clickFavHandler}
+      >{isFav ? 'Убрать' : 'Добавить'}</button>      
     </div>
   )
 }

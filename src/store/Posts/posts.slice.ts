@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IPost } from "../../components/Post";
 
 interface IInitialState {
   favoritePosts: number[];

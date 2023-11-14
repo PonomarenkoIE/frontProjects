@@ -10,7 +10,7 @@ interface PostsProps {
 export default function Posts({title, posts}: PostsProps) {
   return (
     <section className="posts">
-      <h2 className="posts__title">{title}</h2>  
+      <h2 className="posts__title">{title}</h2>
       {posts.map((post) => 
         <Post
           userId={post.userId} 

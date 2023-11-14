@@ -3,7 +3,6 @@ import { postsApi } from './Posts/posts.api'
 import { favoritePostsReducer } from './Posts/posts.slice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
-//TODO: rebuild favoritePosts -> posts; create hook for favoritePosts
 export const store = configureStore({
   reducer: {
     [postsApi.reducerPath]: postsApi.reducer,

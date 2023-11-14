@@ -8,6 +8,7 @@ export default function Nav() {
     <nav className="nav">
       <div className="nav-links">
         {routes.map(({path, linkTitle}) => 
+          linkTitle !== undefined &&  
           <Link 
             to={path}  
             key={path}

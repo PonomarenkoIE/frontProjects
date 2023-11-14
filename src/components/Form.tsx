@@ -2,7 +2,6 @@ import React from 'react';
 import '../style/css/Form.css';
 
 interface FormProps {
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   selector: string
@@ -18,7 +17,7 @@ const labels: {[propName: string]: string} = {
   body: 'Содержание поста',
 }
 
-export default function Form({setShow, value, setSelector, selector, setValue}: FormProps) {
+export default function Form({value, setSelector, selector, setValue}: FormProps) {
   const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelector(e.currentTarget.value)
     setValue('')
@@ -43,15 +42,8 @@ export default function Form({setShow, value, setSelector, selector, setValue}: 
           type="text" 
           className="form__input"
           value={value} 
-          onChange={(e) => {setValue(e.target.value)}}
-        />
-        <button
-          className='form__btn'
-          onClick={(e) => {
-            e.preventDefault()
-            setShow(true)
-          }}
-        >Показать список постов</button>
+          onChange={(e) => setValue(e.target.value)}
+        />        
       </form>
   )
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import { useAppSelector } from '../hooks/redux'
 import Posts from '../components/Posts'
 import { useGetPostsQuery } from '../store/Posts/posts.api'
-import { IPost } from '../components/Post'
 import { useFavPosts } from '../hooks/useFavPosts'
 
 export default function FavoritePostsPage() {
