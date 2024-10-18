@@ -1,14 +1,17 @@
 import { makeAutoObservable } from "mobx";
+import Brash from "../tools/Brush";
+
+export type ToolType = Brash
 
 class ToolState {
-  tool = null
+  tool = {} as ToolType
 
   constructor() {
     
     makeAutoObservable(this)
   }
 
-  setTool(tool: any) {
+  setTool(tool: ToolType) {
     this.tool = tool
   }
 }

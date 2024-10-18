@@ -1,14 +1,16 @@
 import { makeAutoObservable } from "mobx";
 
+export type CanvasType = HTMLCanvasElement
+
 class CanvasState {
-  canvas = null
+  canvas = {} as CanvasType
 
   constructor() {
     
     makeAutoObservable(this)
   }
 
-  setCanvas(canvas: any) {
+  setCanvas(canvas: CanvasType) {
     this.canvas = canvas
   }
 }

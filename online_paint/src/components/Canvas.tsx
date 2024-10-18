@@ -15,7 +15,7 @@ export default observer(function Canvas() {
 
   return (
     <div className='canvas-container'>
-      <canvas ref={canvasRef} className='canvas' width={600} height={400}/>
+      <canvas ref={canvasRef} className='canvas' width={1000} height={600}/>
     </div>
   )
 })
