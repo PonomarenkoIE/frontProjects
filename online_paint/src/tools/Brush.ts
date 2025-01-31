@@ -1,6 +1,6 @@
 import Tool from "./Tool";
 
-export default class Brash extends Tool {
+export default class Brush extends Tool {
   mouseDown: boolean = false
   constructor(canvas: HTMLCanvasElement) {
     super(canvas)
@@ -13,6 +13,7 @@ export default class Brash extends Tool {
     this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
   }
 
+  //React.MouseEvent<HTMLCanvasElement, MouseEvent>
   mouseUpHandler(e: any) {
     this.mouseDown = false
   }
@@ -27,9 +28,8 @@ export default class Brash extends Tool {
     }
   }
 
-  draw(x:number, y:number) {
+  draw(x: number, y: number) {
     this.ctx?.lineTo(x, y)
     this.ctx?.stroke()
-    console.log('work')
   }
 }

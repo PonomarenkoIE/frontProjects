@@ -9,13 +9,23 @@ export default observer(function Canvas() {
   const canvasRef = useRef({} as HTMLCanvasElement)
 
   useEffect(() => {
-    canvasState.setCanvas(canvasRef.current)
-    toolState.setTool(new Brush(canvasRef.current))
+    canvasState.canvas = canvasRef.current
+    toolState.tool = new Brush(canvasRef.current)
   }, [])
+
+  const mouseDownEvent = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    canvasState.pushToUndo(canvasRef.current.toDataURL())
+  }
 
   return (
     <div className='canvas-container'>
-      <canvas ref={canvasRef} className='canvas' width={1000} height={600}/>
+      <canvas 
+        onMouseDown={mouseDownEvent}
+        ref={canvasRef} 
+        className='canvas' 
+        width={500} 
+        height={300} 
+      />
     </div>
   )
 })
